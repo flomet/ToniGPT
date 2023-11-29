@@ -1,0 +1,4 @@
+Flask
+openai
+python-dotenv
+# Hinweis build prozess fuer lxml dauert ewig, funktioniert aber

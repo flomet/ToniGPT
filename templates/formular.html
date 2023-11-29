@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meine Weboberfläche</title>
+    <script>
+        function addKeywordField() {
+            // Finde das DIV-Element für Keywords
+            var keywordDiv = document.getElementById("keyword_div");
+
+            // Erstelle ein neues Dropdown-Element
+            var newDropdown = document.createElement("select");
+            newDropdown.name = "keyword_" + (keywordDiv.childElementCount + 1);
+            
+            // Fülle das Dropdown-Element mit Optionen
+            // TODO: Liste soll aus my_app importiert werden
+            var options = ["Jorin", "Luna", "Felix", "Laura", "Mama", "Papa", "Kinder", "Kindergarten", "Feuerwehr", "Schwimmbad", "Essen", "Sommer", "Winter", "Regen", "Schnee", "Polizei", "Urlaub", "Einhorn", "Pferd", "Hund", "Katze", "Zoowärter", "Zoo", "Bauernhof", "Bauer", "Bäuerin", "Kuh", "Schwein", "Huhn", "Hase", "Oma", "Opa", "Schule", "Pony", "Doktor", "Krankenwagen"];
+            for (var i = 0; i < options.length; i++) {
+                var option = document.createElement("option");
+                option.value = options[i];
+                option.text = options[i];
+                newDropdown.appendChild(option);
+            }
+
+            // Füge das Dropdown-Element dem DIV hinzu
+            keywordDiv.appendChild(newDropdown);
+        }
+
+        function validateAgeInput() {
+            var alterVon = parseInt(document.getElementById("alter_von").value);
+            var alterBis = parseInt(document.getElementById("alter_bis").value);
+
+            if (isNaN(alterVon) || isNaN(alterBis) || alterVon < 0 || alterVon > 99 || alterBis < 0 || alterBis > 99 || alterBis < alterVon) {
+                alert("Bitte geben Sie gültige Werte ein: Alter von muss zwischen 0 und 99 liegen, und Alter bis muss größer oder gleich Alter von sein.");
+                document.getElementById("alter_von").value = "";
+                document.getElementById("alter_bis").value = "";
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>ToniGPT Mockup</h1>
+    <form method="post" onsubmit="return validateAgeInput()">
+        <label for="alter_von">Alter von:</label>
+        <input type="number" name="alter_von" id="alter_von" min="0" max="99" value="2" required><br><br>
+
+        <label for="alter_bis">Alter bis:</label>
+        <input type="number" name="alter_bis" id="alter_bis" min="0" max="99" value="3" required><br><br>
+
+        <label for="wortlimit">Wortlimit:</label>
+        <input type="number" name="wortlimit" id="wortlimit" min="1" max="750" value="750" required><br><br>
+
+        <label for="genre">Genre:</label>
+        <select name="genre" id="genre">
+            {% for option in genre_options %}
+                <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="voice">Voice:</label>
+        <select name="voice" id="voice">
+            {% for option in voice_options %}
+                <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="keyword">Keyword:</label>
+        <div id="keyword_div">
+            <select name="keyword_1">
+                {% for option in keywords_options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select><br><br>
+        </div>
+        
+        <button type="button" onclick="addKeywordField()">+</button><br><br>
+
+        <input type="submit" value="Submit">
+        <h4>Nach Submit dauert es zwei/drei Minuten bis die Geschichte zur Verfügung steht</h4>
+    </form>
+    
+    <h1>Verfügbare Geschichten</h1>
+    <h4>Wird aktuell dynamisch aufgbaut - ggf. mit Database um dann auch Spalten mit Filtern sortiern zu können und nach Kriterien zu suchen</h4>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>MP3</th>
+                <th>Age</th>
+                <th>Genre</th>
+                <th>Wordlimit</th>
+                <th>Keywords</th>
+                <th>Voice</th>
+                <th>Rating</th>
+                <th>Delete</th>
+                <th>prompt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in toni_files_dict.items() %}
+                {% if value.mp3 %}
+                    <tr>
+                        <td>
+                            <audio controls>
+                                <source src="/play/{{ value.mp3 }}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                            {{ value.mp3 }}
+                        </td>
+                        <td>
+                            {% if value.age %}
+                                {{ value.age }}
+                            {% else %}
+                                No age content
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if value.genre %}
+                                {{ value.genre }}
+                            {% else %}
+                                No genre content
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if value.wordlimit %}
+                                {{ value.wordlimit }}
+                            {% else %}
+                                No wordlimit content
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if value.keywords %}
+                                {{ value.keywords }}
+                            {% else %}
+                                No keywords content
+                            {% endif %}
+                        </td>                                                                        
+                        <td>
+                            {% if value.voice %}
+                                {{ value.voice }}
+                            {% else %}
+                                N.A
+                            {% endif %}
+                        </td>  
+                        <td>
+                            Rating Todo
+                        </td>   
+                        <td>
+                            <form action="/delete/{{ value.mp3 }}" method="post">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>   
+                        <td>
+                            {% if value.prompt %}
+                                {{ value.prompt }}
+                            {% else %}
+                                N.A
+                            {% endif %}
+                        </td>     
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

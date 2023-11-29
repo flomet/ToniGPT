@@ -1,0 +1,4 @@
+Random Keywords button
+Rating ggf. mit in json schreiben, dann würde es erst mal keine DB brauchen. 
+
+Diskussion für HW. Stories auf Gerät speichern, oder auf Webspeicher. Im zweiten Fall wäre eigentlich nur ne API für die Web-App nötig
