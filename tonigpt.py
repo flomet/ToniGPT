@@ -33,13 +33,6 @@ def get_create_filename(story_folder: Path) -> Path:
     filename = f"{dateTimeObj.strftime('%Y%m%d_%H%M%S')}.txt"
     return Path(f"{story_folder}/{filename}")
 
-# def get_create_filename(story_folder: Path, number: int) -> Path:
-#     filename = f"{number}.txt"
-#     #return story_folder.joinpath(filename)
-#     #return f"{story_folder}/{filename}"
-#     return Path(f"{story_folder}/{filename}")
-
-
 def get_new_filenumber(story_folder: Path) -> Path:
     """
     Check the given path for existing files with names "{number}.txt".
@@ -105,16 +98,6 @@ def tonigpt(keywords:list, genre:str, age:tuple, wordlimit:int, voice:str, story
     my_story_mp3_file = my_story_file.parent.joinpath(Path(my_story_file).stem + ".mp3")
     shutil.move(my_story_mp3_tmp, my_story_mp3_file)
     logger.debug(f"Audio stored in {my_story_mp3_file}")
-
-# Copy audio, text and metainfo to server (Browser wont allow it to play from the local stories folder)
-    #logger.debug(f"Copy files to server")
-    #logger.debug(f"my_story_mp3_file: {my_story_mp3_file}")
-    #logger.debug(f"story_meta_info_fn: {story_meta_info_fn}")
-    #logger.debug(f"my_story_file: {my_story_file}")
-    #copy_file_to_server(my_story_mp3_file)
-    #copy_file_to_server(story_meta_info_fn)
-    #copy_file_to_server(my_story_file)
-
     return (my_story_mp3_file)
 
 if __name__ == "__main__":
