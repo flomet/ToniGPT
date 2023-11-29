@@ -5,6 +5,7 @@ from pathlib import Path
 import os
 import json
 from dotenv import load_dotenv
+import threading
 
 app = Flask(__name__)
 
@@ -94,15 +95,16 @@ def index():
             if keyword:
                 keywords.append(keyword)
 
-        # Rufe die Funktion test auf und übergebe die Formulareinträge
-        mp3_file = create_story({
+        # Run create_story function as a thread
+        thread = threading.Thread(target=create_story, args=({
             'alter_von': alter_von,
             'alter_bis': alter_bis,
             'wortlimit': wortlimit,
             'genre': genre,
             'keywords': keywords, 
             'voice': voice
-        })
+        },))
+        thread.start()
 
         # Weiterleiten zur Erfolgsseite oder zur gleichen Seite
         # Hier kannst du entscheiden, wohin du nach dem Absenden des Formulars weiterleiten möchtest

@@ -4,7 +4,8 @@
 
 # Run Container: 
 #docker run -p 5000:5000 -v /root/ToniGPT_Stories:/app/stories -d tonigpt
-
+# Synology 
+#sudo docker run -p 5320:5000 -v /volume1/share/docker/ToniGPT_Stories:/app/stories -d tonigpt
 
 # Verwende das offizielle Python-Image als Basis
 FROM python:3.10.13-bookworm
