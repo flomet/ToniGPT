@@ -17,7 +17,7 @@ To get a local copy up and running follow these simple example steps.
 
 You need to have an OpenAI API Key
 
-### Installation
+### Installation local
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
@@ -30,7 +30,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```js
    OPENAI_API_KEY=your_key
    ```
-4. For a local test also enter the path where the stories should be stored in the `.env` (this should not be done for a Docker deploy)
+4. For a local installation also enter the path where the stories should be stored in the `.env` 
    ```js
    STORIES_DIR=./stories
    ```   
@@ -41,11 +41,27 @@ _Below is an example of how you can instruct your audience on installing and set
 6. Run the app
   ```js
    python tonigpt_app.py
-   ``` or 
+   ```
+   or 
   ```js
    flask --app my_flask_app run --debug
-   ``` 
- 
+   ```
+
+### Installation in a Dockercontainer
+
+Follow step 1 to 3 from aboves instruction. 
+
+4. Build the container
+   ```js
+   docker build -t tonigpt .
+   ```   
+
+5. Run the container and mount your story-folder to /app/stories
+  ```js
+  docker run -p 5000:5000 -v /path_to/ToniGPT_Stories:/app/stories -d tonigpt
+  ```
+
+
    
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
