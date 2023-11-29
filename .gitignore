@@ -228,3 +228,6 @@ $RECYCLE.BIN/
 .env
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,flask,venv
+
+
+tonigpt.log
