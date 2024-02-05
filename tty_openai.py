@@ -17,6 +17,7 @@ def tty(client:OpenAI, txt: str, model:str = "tts-1", voice:str = "alloy", mp3_f
         voice= voice.lower(),
         input=txt,
     ) as response:
+        print(f"{datetime.datetime.now()}: response.stream_to_file()")
         response.stream_to_file(mp3_file)
     
     return mp3_file

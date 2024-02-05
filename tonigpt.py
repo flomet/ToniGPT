@@ -92,13 +92,14 @@ def tonigpt(keywords:list, genre:str, age:tuple, wordlimit:int, voice:str, story
     logger.debug(f"Story story_meta_info stored in {story_meta_info_fn}")
 
 # Create Audio
-    my_story_mp3_tmp = tty(client, my_story_str, voice=voice)
+    my_story_mp3_file = my_story_file.parent.joinpath(Path(my_story_file).stem + ".mp3")
+    my_story_mp3_tmp = tty(client, my_story_str, voice=voice, mp3_file=my_story_mp3_file)
     #my_story_mp3_tmp = generate(my_story_str, key)
     print(f"{datetime.now()}: Created {my_story_mp3_tmp}")
 
 # Move Audio to storage story folder
-    my_story_mp3_file = my_story_file.parent.joinpath(Path(my_story_file).stem + ".mp3")
-    shutil.move(my_story_mp3_tmp, my_story_mp3_file)
+    #my_story_mp3_file = my_story_file.parent.joinpath(Path(my_story_file).stem + ".mp3")
+    #shutil.move(my_story_mp3_tmp, my_story_mp3_file)
     logger.debug(f"Audio stored in {my_story_mp3_file}")
     return (my_story_mp3_file)
 
