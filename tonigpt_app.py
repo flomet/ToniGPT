@@ -30,7 +30,7 @@ genre_options = [
 ]
 
 keywords_options = [
-    "Jorin", "Luna", "Felix", "Laura", "Mama", "Papa", "Kinder", "Kindergarten", "Feuerwehr", "Schwimmbad",
+    "Zug", "Jorin", "Luna", "Felix", "Laura", "Mama", "Papa", "Kinder", "Kindergarten", "Feuerwehr", "Schwimmbad",
     "Essen", "Sommer", "Winter", "Regen", "Schnee", "Polizei", "Urlaub", "Einhorn", "Pferd", "Hund", "Katze",
     "Zoowärter", "Zoo", "Bauernhof", "Bauer", "Bäuerin", "Kuh", "Schwein", "Huhn", "Hase", "Oma", "Opa", "Schule",
     "Pony", "Doktor", "Krankenwagen"
@@ -169,7 +169,7 @@ def create_story(form_data:dict)->Path:
     genre = form_data.get("genre")
     voice = form_data.get("voice")
     story_path = Path(story_storage)
-    mp3_file = tonigpt(keywords, genre, age, wordlimit, voice, story_path)
+    mp3_file = tonigpt(keywords, genre, age, wordlimit, voice, story_path, os.getenv("OPENAI_API_KEY"))
     return mp3_file
 
 if __name__ == '__main__':
