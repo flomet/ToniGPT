@@ -30,7 +30,7 @@ genre_options = [
 ]
 
 keywords_options = [
-    "Zug", "Jorin", "Luna", "Felix", "Laura", "Mama", "Papa", "Kinder", "Kindergarten", "Feuerwehr", "Schwimmbad",
+    "Mama", "Papa", "Kinder", "Kindergarten", "Feuerwehr", "Schwimmbad",
     "Essen", "Sommer", "Winter", "Regen", "Schnee", "Polizei", "Urlaub", "Einhorn", "Pferd", "Hund", "Katze",
     "Zoowärter", "Zoo", "Bauernhof", "Bauer", "Bäuerin", "Kuh", "Schwein", "Huhn", "Hase", "Oma", "Opa", "Schule",
     "Pony", "Doktor", "Krankenwagen"
