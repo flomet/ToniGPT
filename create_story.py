@@ -55,7 +55,7 @@ def get_story(client:OpenAI, promt:str)->str:
 
 def get_text_for_keywords(client:OpenAI, keywords:list,  genre:str, age:tuple, wordlimit:int)->tuple[str, str]:
     prompt = get_prompt_text(keywords, genre, age, wordlimit)
-    print(f"Promt: {prompt}")
+    print(f"Prompt: {prompt}")
     story = get_story(client, prompt)
     return story, prompt
 
